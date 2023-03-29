@@ -17,7 +17,11 @@ abstract class AbstractODM<T> {
   }
 
   public async create(obj: T): Promise<T> {
-    return this.model.create({ ...obj });
+    try {
+      return await this.model.create({ ...obj });
+    } catch {
+      throw new Error('Propriedas inválidas');
+    }
   }
 }
 
