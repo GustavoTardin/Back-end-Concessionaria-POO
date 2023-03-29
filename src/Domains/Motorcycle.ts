@@ -1,4 +1,4 @@
-import { IMotorcycle } from '../Interfaces';
+import IMotorcycle from '../Interfaces/IMotorcycle';
 import Vehicle from './Vehicle';
 
 class Motorcycle extends Vehicle {

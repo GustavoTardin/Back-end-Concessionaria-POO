@@ -1,4 +1,5 @@
-import { ICar, ICarService } from '../Interfaces';
+import ICarService from '../Interfaces/services/ICarService';
+import ICar from '../Interfaces/ICar';
 import AbstractODM from '../Models/AbstractODM';
 import Car from '../Domains/Car';
 
