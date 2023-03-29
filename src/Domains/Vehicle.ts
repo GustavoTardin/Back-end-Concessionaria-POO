@@ -7,13 +7,13 @@ class Vehicle {
   protected color: string;
   protected status: boolean;
   protected buyValue: number;
-  constructor(car: IVehicle) {
-    this.id = car.id || undefined;
-    this.model = car.model;
-    this.year = car.year;
-    this.color = car.color;
-    this.status = car.status || false;
-    this.buyValue = car.buyValue;
+  constructor(vehicle: IVehicle) {
+    this.id = vehicle.id || undefined;
+    this.model = vehicle.model;
+    this.year = vehicle.year;
+    this.color = vehicle.color;
+    this.status = vehicle.status || false;
+    this.buyValue = vehicle.buyValue;
   }
 
   public setId(id: string) {
