@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import ICarService from '../Interfaces/services/ICarService';
 
 class CarController {
@@ -8,11 +8,14 @@ class CarController {
     this.service = serv;
   }
 
-  public createCar = async (req: Request, res: Response) => {
-    // const car = { ...req.body, status: req.body.status || false };
-
-    const newCar = await this.service.register(req.body);
-    return res.status(201).json(newCar);
+  public createCar = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const newCar = await this.service.register(req.body);
+      return res.status(201).json(newCar);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
   };
 }
 

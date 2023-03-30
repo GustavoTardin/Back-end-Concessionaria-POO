@@ -4,6 +4,7 @@ import {
   Schema,
   model,
 } from 'mongoose';
+import CustomError from '../Errors/CustomError';
 
 abstract class AbstractODM<T> {
   protected model: Model<T>;
@@ -20,7 +21,7 @@ abstract class AbstractODM<T> {
     try {
       return await this.model.create({ ...obj });
     } catch {
-      throw new Error('Propriedas inválidas');
+      throw new CustomError('a', 'Propriedas inválidas', '400');
     }
   }
 }
