@@ -10,20 +10,27 @@ class CarService implements ICarService {
     this.model = ODM;
   }
 
-  private createDomain(newCar: ICar): Car {
-    return new Car(newCar);
+  private createDomain(newCar: ICar | null): Car | null {
+    if (newCar) {
+      return new Car(newCar);
+    } 
+    return null;
   }
 
   async register(car: ICar): Promise<Car> {
     const newCar = await this.model.create(car);
     const domain = this.createDomain(newCar);
+    return domain as Car;
+  }
+  async getAll(): Promise<Car[]> {
+    const cars = await this.model.getAll();
+    const domains = cars.map((e) => this.createDomain(e));
+    return domains as Car[];
+  }
+  async getById(id: string): Promise<Car | null> {
+    const car = await this.model.getById(id);
+    const domain = this.createDomain(car);
     return domain;
-  }
-  getAll(): Promise<ICar[]> {
-    throw new Error('Method not implemented.');
-  }
-  getById(): Promise<ICar | null> {
-    throw new Error('Method not implemented.');
   }
 }
 

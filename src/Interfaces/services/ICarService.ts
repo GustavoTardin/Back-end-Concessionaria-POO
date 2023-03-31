@@ -3,8 +3,8 @@ import ICar from '../ICar';
 
 interface ICarService {
   register(car: ICar): Promise<Car>,
-  getAll(): Promise<ICar[]>,
-  getById(id: string): Promise<ICar | null>
+  getAll(): Promise<Car[]>,
+  getById(id: string): Promise<Car | null>
 }
 
 export default ICarService;

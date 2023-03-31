@@ -10,5 +10,7 @@ const carService = new CarService(carODM);
 const carController = new CarController(carService);
 
 carRouter.post('/', carController.createCar);
+carRouter.get('/', carController.getCars);
+carRouter.get('/:id', carController.getCarById);
 
 export default carRouter;
