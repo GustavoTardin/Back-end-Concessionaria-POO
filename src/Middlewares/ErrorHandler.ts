@@ -5,14 +5,12 @@ class ErrorHandler {
     error: Error,
     _req: Request,
     res: Response,
-    next: NextFunction,
+    _next: NextFunction,
   ) {
     if (error instanceof Error && error.stack) {
-      res.status(+error.stack).json({ message: error.message });
-      next();
+      return res.status(+error.stack).json({ message: error.message });
     }
-    res.status(500).json({ message: error.message });
-    next();
+    return res.status(500).json({ message: error.message });
   }
 }
 

@@ -9,6 +9,9 @@ class CarService implements ICarService {
   constructor(ODM: AbstractODM<ICar>) {
     this.model = ODM;
   }
+  updateById(car: ICar): Promise<Car | null> {
+    throw new Error('Method not implemented.');
+  }
 
   private createDomain(newCar: ICar | null): Car | null {
     if (newCar) {
