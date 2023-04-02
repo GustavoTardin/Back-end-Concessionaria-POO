@@ -1,5 +1,5 @@
 import AbstractService from './AbstractService';
-import carSchema from '../JoiSchemas/carSchema';
+import carSchema from '../Utils/JoiSchemas/carSchema';
 import CarODM from '../Models/CarODM';
 import ICar from '../Interfaces/ICar';
 

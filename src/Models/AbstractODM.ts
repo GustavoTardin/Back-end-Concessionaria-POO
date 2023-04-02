@@ -35,7 +35,7 @@ abstract class AbstractODM<T> {
   public async getById(id: string): Promise<T> {
     if (!isValidObjectId(id)) throw new CustomError('Invalid mongo id', '422');
     const document = await this.model.findById(id);
-    if (!document) throw new CustomError('Car not found', '404');
+    if (!document) throw new CustomError(`${this.modelName} not found`, '404');
     return document;
   }
 
@@ -47,7 +47,7 @@ abstract class AbstractODM<T> {
       obj as UpdateQuery<T>,
       { new: true },
     );
-    if (!newDocument) throw new CustomError('Car not found', '404');
+    if (!newDocument) throw new CustomError(`${this.modelName} not found`, '404');
     return newDocument;
   }
 }

@@ -1,23 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
-import ICarService from '../Interfaces/services/ICarService';
 import ICar from '../Interfaces/ICar';
-import Car from '../Domains/Car';
+import AbstractService from '../Services/AbstractService';
+import VehicleFactory from '../Utils/VehicleFactory';
 
 class CarController {
-  service: ICarService;
+  service: AbstractService<ICar>;
 
-  constructor(serv: ICarService) {
+  constructor(serv: AbstractService<ICar>) {
     this.service = serv;
-  }
-
-  private createDomain(newCar: ICar): Car {
-    return new Car(newCar);
   }
 
   public createCar = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const newCar = await this.service.register(req.body);
-      const domain = this.createDomain(newCar);
+      const domain = VehicleFactory.createCarDomain(newCar);
       return res.status(201).json(domain);
     } catch (error) {
       next(error);
@@ -26,7 +22,7 @@ class CarController {
 
   public getCars = async (req: Request, res: Response) => {
     const cars = await this.service.getAll();
-    const domain = cars.map((e) => this.createDomain(e));
+    const domain = cars.map((e) => VehicleFactory.createCarDomain(e));
     return res.status(200).json(domain);
   };
 
@@ -34,7 +30,7 @@ class CarController {
     const { id } = req.params;
     try {
       const car = await this.service.getById(id);
-      const domain = this.createDomain(car);
+      const domain = VehicleFactory.createCarDomain(car);
       return res.status(200).json(domain);
     } catch (error) {
       next(error);
@@ -45,7 +41,7 @@ class CarController {
     const { id } = req.params;
     try {
       const newCar = await this.service.updateById(id, req.body);
-      const domain = this.createDomain(newCar);
+      const domain = VehicleFactory.createCarDomain(newCar);
       return res.status(200).json(domain);
     } catch (error) {
       next(error);

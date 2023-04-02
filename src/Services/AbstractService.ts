@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import JoiValidation from '../Middlewares/JoiValidations';
+import JoiValidation from '../Utils/JoiValidations';
 import AbstractODM from '../Models/AbstractODM';
 
 abstract class AbstractService<T> {

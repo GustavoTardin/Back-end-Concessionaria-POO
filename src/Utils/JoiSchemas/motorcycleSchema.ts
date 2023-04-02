@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const motorCycleSchema = Joi.object({
+const motorcycleSchema = Joi.object({
   model: Joi.string().required(),
   year: Joi.number().min(1886).required(),
   color: Joi.string().required(),
@@ -10,4 +10,4 @@ const motorCycleSchema = Joi.object({
   engineCapacity: Joi.number().required(),
 });
 
-export default motorCycleSchema;
+export default motorcycleSchema;
