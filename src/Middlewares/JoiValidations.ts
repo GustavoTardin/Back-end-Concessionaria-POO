@@ -2,23 +2,14 @@ import Joi from 'joi';
 import CustomError from '../Errors/CustomError';
 
 class JoiValidation {
-  private _carSchema;
+  private _schema;
 
-  constructor() {
-    const carSchema = Joi.object({
-      model: Joi.string().required(),
-      year: Joi.number().min(1886).required(),
-      color: Joi.string().required(),
-      status: Joi.boolean(),
-      buyValue: Joi.number().required(),
-      doorsQty: Joi.number().required(),
-      seatsQty: Joi.number().required(),
-    });
-    this._carSchema = carSchema;
+  constructor(schema: Joi.ObjectSchema<unknown>) {
+    this._schema = schema;
   }
 
-  validateCar(car: unknown) {
-    const { error } = this._carSchema.validate(car);
+  validateVehicle(vehicle: unknown) {
+    const { error } = this._schema.validate(vehicle);
     if (error) throw new CustomError(error.message, '400');
   }
 }

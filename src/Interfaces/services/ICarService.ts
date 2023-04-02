@@ -1,11 +1,10 @@
-import Car from '../../Domains/Car';
 import ICar from '../ICar';
 
 interface ICarService {
-  register(car: ICar): Promise<Car>,
-  getAll(): Promise<Car[]>,
-  getById(id: string): Promise<Car>
-  updateById(id: string, car: ICar): Promise<Car>
+  register(car: ICar): Promise<ICar>,
+  getAll(): Promise<ICar[]>,
+  getById(id: string): Promise<ICar>
+  updateById(id: string, car: ICar): Promise<ICar>
 }
 
 export default ICarService;
