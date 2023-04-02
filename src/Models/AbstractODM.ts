@@ -12,6 +12,7 @@ abstract class AbstractODM<T> {
   protected model: Model<T>;
   protected schema: Schema;
   protected modelName: string;
+  private _invalidMongo = 'Invalid mongo id';
 
   constructor(schema: Schema, modelName: string) {
     this.schema = schema;
@@ -33,14 +34,14 @@ abstract class AbstractODM<T> {
   }
 
   public async getById(id: string): Promise<T> {
-    if (!isValidObjectId(id)) throw new CustomError('Invalid mongo id', '422');
+    if (!isValidObjectId(id)) throw new CustomError(this._invalidMongo, '422');
     const document = await this.model.findById(id);
     if (!document) throw new CustomError(`${this.modelName} not found`, '404');
     return document;
   }
 
   public async updateById(id: string, obj: T): Promise<T> {
-    if (!isValidObjectId(id)) throw new CustomError('Invalid mongo id', '422');
+    if (!isValidObjectId(id)) throw new CustomError(this._invalidMongo, '422');
 
     const newDocument = await this.model.findByIdAndUpdate(
       { _id: id },
@@ -49,6 +50,12 @@ abstract class AbstractODM<T> {
     );
     if (!newDocument) throw new CustomError(`${this.modelName} not found`, '404');
     return newDocument;
+  }
+
+  public async deleteById(id: string):Promise<void> {
+    if (!isValidObjectId(id)) throw new CustomError(this._invalidMongo, '422');
+    const deletedDocument = await this.model.findByIdAndDelete(id);
+    if (!deletedDocument) throw new CustomError(`${this.modelName} not found`, '404');
   }
 }
 

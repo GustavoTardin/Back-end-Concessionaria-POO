@@ -13,27 +13,36 @@ abstract class AbstractController<T> {
     this.domainType = type;
   }
 
-  public createCar = async (req: Request, res: Response, next: NextFunction) => {
+  public createVehicle = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const newCar = await this._service.register(req.body);
-      const domain = VehicleFactory.createDomain(this.domainType, newCar as ICar | IMotorcycle);
+      const newVehicle = await this._service.register(req.body);
+      const domain = VehicleFactory.createDomain(
+        this.domainType,
+        newVehicle as unknown as ICar | IMotorcycle,
+      );
+        
       return res.status(201).json(domain);
     } catch (error) {
       next(error);
     }
   };
 
-  public getCars = async (req: Request, res: Response) => {
-    const cars = await this.service.getAll();
-    const domain = cars.map((e) => VehicleFactory.createCarDomain(e));
+  public getVehicles = async (req: Request, res: Response) => {
+    const vehicles = await this._service.getAll();
+    const domain = vehicles.map((e) => (
+      VehicleFactory.createDomain(this.domainType, e as unknown as ICar | IMotorcycle)));
+
     return res.status(200).json(domain);
   };
 
-  public getCarById = async (req: Request, res: Response, next: NextFunction) => {
+  public getVehicleById = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
-      const car = await this.service.getById(id);
-      const domain = VehicleFactory.createCarDomain(car);
+      const vehicle = await this._service.getById(id);
+      const domain = VehicleFactory.createDomain(
+        this.domainType,
+        vehicle as unknown as ICar | IMotorcycle,
+      );
       return res.status(200).json(domain);
     } catch (error) {
       next(error);
@@ -43,9 +52,22 @@ abstract class AbstractController<T> {
   public updateById = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
-      const newCar = await this.service.updateById(id, req.body);
-      const domain = VehicleFactory.createCarDomain(newCar);
+      const newVehicle = await this._service.updateById(id, req.body);
+      const domain = VehicleFactory.createDomain(
+        this.domainType,
+        newVehicle as unknown as ICar | IMotorcycle,
+      );
       return res.status(200).json(domain);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public deleteById = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      await this._service.deleteById(id);
+      return res.status(204).send();
     } catch (error) {
       next(error);
     }

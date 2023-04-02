@@ -7,9 +7,10 @@ const motorRouter = Router();
 const motorbikeService = new MotorcycleService();
 const motorbikeController = new MotorcicleController(motorbikeService);
 
-motorRouter.post('/', motorbikeController.createMotorcycle);
-motorRouter.get('/', motorbikeController.getMotorCycles);
-motorRouter.get('/:id', motorbikeController.getMotorbikeById);
+motorRouter.post('/', motorbikeController.createVehicle);
+motorRouter.get('/', motorbikeController.getVehicles);
+motorRouter.get('/:id', motorbikeController.getVehicleById);
 motorRouter.put('/:id', motorbikeController.updateById);
+motorRouter.delete('/:id', motorbikeController.deleteById);
 
 export default motorRouter;

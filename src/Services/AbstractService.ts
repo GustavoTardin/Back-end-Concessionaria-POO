@@ -31,6 +31,10 @@ abstract class AbstractService<T> {
     const vehicle = await this.model.getById(id);
     return vehicle;
   }
+
+  async deleteById(id: string): Promise<void> {
+    await this.model.deleteById(id);
+  }
 }
 
 export default AbstractService;
