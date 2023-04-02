@@ -3,6 +3,7 @@ import {
   models,
   Schema,
   model,
+  UpdateQuery,
   isValidObjectId,
 } from 'mongoose';
 import CustomError from '../Errors/CustomError';
@@ -22,7 +23,7 @@ abstract class AbstractODM<T> {
     try {
       return await this.model.create({ ...obj });
     } catch {
-      throw new CustomError('Propriedas inválidas', '400');
+      throw new CustomError('Sorry, some error happened on our server :(', '500');
     }
   }
 
@@ -31,17 +32,24 @@ abstract class AbstractODM<T> {
     return documents;
   }
 
-  public async getById(id: string): Promise<T | null> {
+  public async getById(id: string): Promise<T> {
     if (!isValidObjectId(id)) throw new CustomError('Invalid mongo id', '422');
     const document = await this.model.findById(id);
+    if (!document) throw new CustomError('Car not found', '404');
     return document;
   }
 
-  public async updateById(id: string, obj: T) {
+  public async updateById(id: string, obj: T): Promise<T> {
     if (!isValidObjectId(id)) throw new CustomError('Invalid mongo id', '422');
-    const newDocument = await this.model.findByIdAndUpdate();
-  }
 
+    const newDocument = await this.model.findByIdAndUpdate(
+      { _id: id },
+      obj as UpdateQuery<T>,
+      { new: true },
+    );
+    if (!newDocument) throw new CustomError('Car not found', '404');
+    return newDocument;
+  }
 }
 
 export default AbstractODM;

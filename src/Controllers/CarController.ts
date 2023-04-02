@@ -13,7 +13,6 @@ class CarController {
       const newCar = await this.service.register(req.body);
       return res.status(201).json(newCar);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   };
@@ -27,8 +26,17 @@ class CarController {
     const { id } = req.params;
     try {
       const car = await this.service.getById(id);
-      if (!car) return res.status(404).json({ message: 'Car not found' });
       return res.status(200).json(car);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateById = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      const newCar = await this.service.updateById(id, req.body);
+      return res.status(200).json(newCar);
     } catch (error) {
       next(error);
     }
