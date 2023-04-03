@@ -1,20 +1,14 @@
 import Car from '../Domains/Car';
 import Motorcycle from '../Domains/Motorcycle';
+import Vehicle from '../Domains/Vehicle';
 import CustomError from '../Errors/CustomError';
 import ICar from '../Interfaces/ICar';
 import IMotorcycle from '../Interfaces/IMotorcycle';
+import IVehicle from '../Interfaces/IVehicle';
 import VehicleTypes from './VehicleTypes';
 
 class VehicleFactory {
-  public static createCarDomain(car: ICar): Car {
-    return new Car(car);
-  }
-
-  public static createMotorcycleDomain(mt: IMotorcycle): Motorcycle {
-    return new Motorcycle(mt);
-  }
-
-  public static createDomain(type: string, obj: ICar | IMotorcycle): Car | Motorcycle {
+  public static createDomain(type: string, obj: IVehicle): Vehicle {
     if (type === VehicleTypes.CAR) {
       return new Car(obj as ICar);
     }

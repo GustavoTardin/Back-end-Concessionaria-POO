@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import AbstractService from '../Services/AbstractService';
 import VehicleFactory from '../Utils/VehicleFactory';
-import ICar from '../Interfaces/ICar';
-import IMotorcycle from '../Interfaces/IMotorcycle';
+import IVehicle from '../Interfaces/IVehicle';
 
 abstract class AbstractController<T> {
   private _service: AbstractService<T>;
@@ -18,7 +17,7 @@ abstract class AbstractController<T> {
       const newVehicle = await this._service.register(req.body);
       const domain = VehicleFactory.createDomain(
         this.domainType,
-        newVehicle as unknown as ICar | IMotorcycle,
+        newVehicle as unknown as IVehicle,
       );
         
       return res.status(201).json(domain);
@@ -30,7 +29,7 @@ abstract class AbstractController<T> {
   public getVehicles = async (req: Request, res: Response) => {
     const vehicles = await this._service.getAll();
     const domain = vehicles.map((e) => (
-      VehicleFactory.createDomain(this.domainType, e as unknown as ICar | IMotorcycle)));
+      VehicleFactory.createDomain(this.domainType, e as unknown as IVehicle)));
 
     return res.status(200).json(domain);
   };
@@ -41,7 +40,7 @@ abstract class AbstractController<T> {
       const vehicle = await this._service.getById(id);
       const domain = VehicleFactory.createDomain(
         this.domainType,
-        vehicle as unknown as ICar | IMotorcycle,
+        vehicle as unknown as IVehicle,
       );
       return res.status(200).json(domain);
     } catch (error) {
@@ -55,7 +54,7 @@ abstract class AbstractController<T> {
       const newVehicle = await this._service.updateById(id, req.body);
       const domain = VehicleFactory.createDomain(
         this.domainType,
-        newVehicle as unknown as ICar | IMotorcycle,
+        newVehicle as unknown as IVehicle,
       );
       return res.status(200).json(domain);
     } catch (error) {
