@@ -1,4 +1,4 @@
-import Joi from 'joi';
+/* import Joi from 'joi';
 
 const carSchema = Joi.object({
   model: Joi.string().required(),
@@ -11,3 +11,4 @@ const carSchema = Joi.object({
 });
 
 export default carSchema;
+*/

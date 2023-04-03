@@ -1,4 +1,4 @@
-import Joi from 'joi';
+/* import Joi from 'joi';
 
 const motorcycleSchema = Joi.object({
   model: Joi.string().required(),
@@ -11,3 +11,4 @@ const motorcycleSchema = Joi.object({
 });
 
 export default motorcycleSchema;
+*/
