@@ -1,12 +1,11 @@
 import AbstractService from './AbstractService';
-// import carSchema from '../Utils/JoiSchemas/carSchema';
-import CarODM from '../Models/CarODM';
+import carSchema from '../Utils/JoiSchemas/carSchema';
 import ICar from '../Interfaces/ICar';
+import AbstractODM from '../Models/AbstractODM';
 
 class CarService extends AbstractService<ICar> {
-  constructor() {
-    const carODM = new CarODM();
-    super(carODM);
+  constructor(ODM: AbstractODM<ICar>) {
+    super(ODM, carSchema);
   }
 }
 

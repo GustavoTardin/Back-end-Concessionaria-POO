@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import MotorcycleService from '../Services/MotorcycleService';
 import MotorcicleController from '../Controllers/MotorcycleController';
+import MotorcycleODM from '../Models/MotorcycleODM';
 
 const motorRouter = Router();
 
-const motorbikeService = new MotorcycleService();
+const motorcycleODM = new MotorcycleODM();
+const motorbikeService = new MotorcycleService(motorcycleODM);
 const motorbikeController = new MotorcicleController(motorbikeService);
 
 motorRouter.post('/', motorbikeController.createVehicle);

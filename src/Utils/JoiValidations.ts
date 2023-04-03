@@ -1,4 +1,4 @@
-/* import Joi from 'joi';
+import Joi from 'joi';
 import CustomError from '../Errors/CustomError';
 
 class JoiValidation {
@@ -15,6 +15,3 @@ class JoiValidation {
 }
 
 export default JoiValidation;
-
-, schema: Joi.ObjectSchema<unknown>
-*/

@@ -2,21 +2,21 @@ import ICar from '../Interfaces/ICar';
 import Vehicle from './Vehicle';
 
 class Car extends Vehicle {
-  private doorsQty: number;
-  private seatsQty: number;
+  private _doorsQty: number;
+  private _seatsQty: number;
 
   constructor(car: ICar) {
     super(car);
-    this.doorsQty = car.doorsQty;
-    this.seatsQty = car.seatsQty;
+    this._doorsQty = car.doorsQty;
+    this._seatsQty = car.seatsQty;
   }
 
-  public getDoorsQty() {
-    return this.doorsQty;
+  get getDoorsQty() {
+    return this._doorsQty;
   }
 
-  public getSeatsQty() {
-    return this.seatsQty;
+  get getSeatsQty() {
+    return this._seatsQty;
   }
 }
 
