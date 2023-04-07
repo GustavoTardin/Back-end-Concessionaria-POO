@@ -1,10 +1,8 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+Back end de uma concessionária, feito em Typescript, utilizando o paradiga de programação orientada à objetos.
+ Foi utilizado o ODM mongoose para interação com o banco de dados MongoDB, express para lidar com requisições HTTP, 
+ utlizei o o design pattern Factory Method, JOI para validação de requisições e MSC como arquitetura de Software.
+ 
+ Até o momento possui endpoint de carros, motos e caminhões, e pela aplicação de princípios de SOLID é possível facil e rapidamente 
+ adicionar novas features e/ou tipos de veículos. A API tem a funcionalidade de listar, cadastrar, atualizar ou excluir um veículo.
+ 
+ É importante citar que foi desenvolvido testes de unidade para camada Service, chegando a 100% de coverage pra essa pasta. Para os testes, foram utilizados as bibliotecas chai, sinon, e Mocha.
